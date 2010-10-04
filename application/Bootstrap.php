@@ -1,8 +1,37 @@
 <?php
+/**
+ * MyBills
+ *
+ * LICENSE
+ *
+ * This source file is subject to the CC-GNU GPL license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/GPL/2.0/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@mybills.cc so we can send you a copy immediately.
+ *
+ * @category   MyBills
+ * @package    MyBills_Bootstrap
+ * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
+ * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
+ * @author     tstachl
+ */
+
+/**
+ * @see Zend_Application_Bootstrap_Bootstrap
+ */
+require_once 'Zend/Application/Bootstrap/Bootstrap.php';
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
+	/**
+	 * Initializes the logger.
+	 * 
+     * @return void
+	 */
 	protected function _initLogger()
 	{
 		$logger = Zend_Log::factory(array(
@@ -31,6 +60,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Registry::set('logger', $logger);		
 	}
 	
+	/**
+	 * Initializes the autoloader and registers the custom namespaces.
+	 * 
+     * @return void
+	 */
+	protected function _initAutoloader()
+	{
+		Zend_Registry::get('logger')->info(__METHOD__);
+		
+		$autoloader = Zend_Loader_Autoloader::getInstance();
+		$autoloader->registerNamespace('MyBills_');
+	}
+	
+	/**
+	 * Initializes the view and adds title, scripts, css files and more.
+	 * 
+     * @return void
+	 */
 	protected function _initViewExtension()
 	{
 		Zend_Registry::get('logger')->info(__METHOD__);
