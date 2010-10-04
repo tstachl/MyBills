@@ -1,0 +1,17 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<?php echo $this->headMeta() ?>
+		<?php echo $this->headTitle() ?>
+		<?php echo $this->headLink() ?>
+	</head>
+	<body>
+		<div id="wrapper" class="container_16">
+			<?php echo $this->partial('header.phtml') ?>
+			<?php echo $this->layout()->sidebar ?>
+			<?php echo $this->layout()->content ?>
+			<?php echo $this->partial('footer.phtml') ?>
+		</div>
+		<?php echo $this->headScript() ?>
+	</body>
+</html>
