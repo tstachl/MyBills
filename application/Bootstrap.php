@@ -90,7 +90,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->headLink()->appendStylesheet($view->baseUrl() . '/css/reset.css')
 						 ->appendStylesheet($view->baseUrl() . '/css/text.css')
 						 ->appendStylesheet($view->baseUrl() . '/css/960.css')
-						 ->appendStylesheet($view->baseUrl() . '/css/login.css');
+						 ->appendStylesheet($view->baseUrl() . '/css/forms.css')
+						 ->appendStylesheet($view->baseUrl() . '/css/tiptip.css');
+						 
+		if (Zend_Auth::getInstance()->hasIdentity()) {
+			$view->headLink()->appendStylesheet($view->baseUrl() . '/css/base.css')
+							 ->appendStylesheet($view->baseUrl() . '/css/invoice.css');
+		} else {
+			$view->headLink()->appendStylesheet($view->baseUrl() . '/css/login.css');
+		}
 						 
 		$view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8')
 						 ->appendName('author', 'Thomas Stachl')
@@ -98,11 +106,51 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 						 ->appendName('description', 'The easy billing and invoicing system.');
 		
 		$view->headScript()->appendFile('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/login.js', 'text/javascript');
+						   ->appendFile($view->baseUrl() . '/js/jquery.tiptip.min.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/forms.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/invoice.js', 'text/javascript');
 						   
 		$view->headTitle('MyBills.cc')->setSeparator(' - ')
 									  ->setDefaultAttachOrder(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
 		
+	}
+	
+	protected function _initNavigation()
+	{
+		$container = new Zend_Navigation(array(
+			array(
+				'label'			=> 'File Invoice',
+				'action'		=> 'index',
+				'controller'	=> 'invoice',
+				'title'			=> 'Create new invoices in a simple way'
+			),
+			array(
+				'label'			=> 'Contacts',
+				'action'		=> 'index',
+				'controller'	=> 'contacts',
+				'title'			=> 'Manage your contacts'
+			),
+			array(
+				'label'			=> 'Products',
+				'action'		=> 'index',
+				'controller'	=> 'products',
+				'title'			=> 'Add and remove products'
+			),
+			array(
+				'label'			=> 'Archive',
+				'action'		=> 'index',
+				'controller'	=> 'archive',
+				'title'			=> 'All your created invoices'
+			),
+			array(
+				'label'			=> 'Company',
+				'action'		=> 'index',
+				'controller'	=> 'company',
+				'title'			=> 'Company logo, address and more'
+			)
+		));
+		
+		Zend_Registry::set('Sidebar', $container);
 	}
 
 }

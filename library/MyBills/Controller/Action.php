@@ -13,15 +13,28 @@
  * to license@mybills.cc so we can send you a copy immediately.
  *
  * @category   MyBills
- * @package    MyBills_Model
+ * @package    MyBills_Controller
  * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
  * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
  */
 
 /**
- * @see MyBills_Exception
+ * @see Zend_Controller_Action
  */
-require_once 'MyBills/Exception.php';
+require_once 'Zend/Controller/Action.php';
 
-class MyBills_Model_Exception extends MyBills_Exception
-{}
+class MyBills_Controller_Action extends Zend_Controller_Action
+{
+	
+	public function preDispatch()
+	{
+		if (!Zend_Auth::getInstance()->hasIdentity()) {
+			// If they aren't logged in they can't logout so we redirect
+			// them to the login form
+			$this->_helper->redirector('index', 'login');
+		}
+		
+		parent::preDispatch();
+	}
+	
+}

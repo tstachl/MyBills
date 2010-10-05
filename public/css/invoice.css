@@ -1,0 +1,66 @@
+#product-element fieldset,
+#taxstuff-element fieldset {
+	margin-bottom: 20px;
+}
+
+#product-element fieldset dl,
+#taxstuff-element fieldset dl {
+	clear: both;
+}
+
+#product-element fieldset dd.product_pieces,
+#product-element fieldset dd.product_name,
+#product-element fieldset dd.product_price {
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 0;
+}
+
+#product-element fieldset dd.product_pieces div,
+#product-element fieldset dd.product_name div,
+#product-element fieldset dd.product_price div,
+#taxstuff-element fieldset dd.tax_tax div,
+#taxstuff-element fieldset dd.tax_taxsum div {
+	margin-bottom: 0;
+}
+
+#product-element fieldset dd.product_pieces {
+	width: 60px;
+}
+
+#product-element fieldset dd.product_name {
+	width: 438px;
+}
+
+#product-element fieldset dd.product_price {
+	margin-right: 0;
+	width: 100px;
+}
+
+
+
+#taxstuff-element fieldset dd.tax_tax {
+	float: right;
+	margin-bottom: 0;
+	width: 60px;
+}
+
+#taxstuff-element fieldset dd.tax_taxsum {
+	float: right;
+	margin-bottom: 0;
+	margin-left: 20px;
+	margin-right: 2px;
+	width: 100px;
+}
+
+.form dl dd.grandsum,
+.form dl dd.button {
+	clear: both;
+}
+
+.form dl dd.grandsum div.element,
+.form dl dd.button div.element {
+	float: right;
+	margin-right: 2px;
+	width: 170px;
+}

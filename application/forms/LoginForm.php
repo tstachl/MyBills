@@ -32,9 +32,10 @@ class MyBills_Form_LoginForm extends Zend_Form
 	 */
 	public $elementDecorators = array(
 		'ViewHelper',
-		array(array('element' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element')),
-		'Errors',
-		array(array('row' => 'HtmlTag'), array('tag' => 'div'))
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element')),
+		array('HtmlTag', array('tag' => 'dd')),
+		array('Label', array('tag' => 'dt')),
+		'Errors'
 	);
 	
 	/**
@@ -49,7 +50,8 @@ class MyBills_Form_LoginForm extends Zend_Form
 	 */
 	public $buttonDecorators = array(
 		'ViewHelper',
-		array('HtmlTag', array('tag' => 'div', 'class' => 'button'))
+		array('HtmlTag', array('tag' => 'dd', 'class' => 'button')),
+		array('Label', array('tag' => 'dt'))
 	);
 	
 	/**
@@ -59,9 +61,11 @@ class MyBills_Form_LoginForm extends Zend_Form
 	 */
 	public function init()
 	{
+    	Zend_Registry::get('logger')->info(__METHOD__);
+    	
 		$username = $this->addElement('text', 'username', array(
 			'decorators'	=> $this->elementDecorators,
-			'value'			=> 'Username',
+			'label'			=> 'Username',
 			'filter'		=> array('StringTrim', 'StringToLower'),
 			'validators'	=> array('EmailAddress'),
 			'required'		=> true
@@ -69,6 +73,7 @@ class MyBills_Form_LoginForm extends Zend_Form
 				
 		$password = $this->addElement('password', 'password', array(
 			'decorators'	=> $this->elementDecorators,
+			'label'			=> 'Password',
 			'filters'		=> array('StringTrim'),
 			'validators'	=> array(
 				'Alnum',
@@ -82,23 +87,12 @@ class MyBills_Form_LoginForm extends Zend_Form
 			'ignore'	=> true
 		));
 		
-		$passwordtext = $this->addElement('hidden', 'passwordtext', array(
-			'value'		=> 'Password',
-			'decorators'=> $this->hiddenDecorators,
-			'ignore'	=> true,
-			'required'	=> false
-		));
-		
 		$login = $this->addElement('submit', 'login', array(
 			'decorators'=> $this->buttonDecorators,
 			'required'	=> false,
 			'ignore'	=> true,
 			'label'		=> 'Login'
 		));
-		
-		foreach ($this->_elements as $element) {
-			$element->removeDecorator('Label');
-		}
 		
 //		$recover = $this->addElement('button', 'recover', array(
 //			'required'	=> false,
@@ -109,7 +103,7 @@ class MyBills_Form_LoginForm extends Zend_Form
 		$this->setDecorators(array(
 			array('Description', array('placement' => 'append')),
 			array('FormElements'),
-			array('HtmlTag', array('tag' => 'div', 'class' => 'login_form')),
+			array('HtmlTag', array('tag' => 'dl')),
 			array('Form')
 		));
 		

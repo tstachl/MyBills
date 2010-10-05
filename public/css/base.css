@@ -1,0 +1,88 @@
+html, body {
+	background: #FFFFFF url("/images/bg.jpg") top center repeat-y;
+}
+
+#wrapper {
+	background: transparent url("/images/wrapper_bg.jpg") top left repeat-y;
+}
+
+.header {
+	background: #F2F2F2;
+}
+
+.logo h1 {
+	background: transparent url("/images/mybills_cc_logo.png") top left no-repeat;
+	height: 55px;
+	margin-top: 25px;
+}
+
+.logo h1 span {
+	display: none;
+}
+
+.user {
+	padding-top: 53px;
+	text-align: right;
+}
+
+.title {
+	border-bottom: 2px solid #A4A875;
+	margin-top: 30px;
+	padding-bottom: 5px;
+}
+
+.title h1 {
+	margin-bottom: 0;
+}
+
+.sidebar {
+	margin: 28px 20px 0 0;
+}
+
+.sidebar ul {
+	list-style: none;
+	margin-bottom: 30px;
+	width: 240px;
+}
+
+.sidebar ul li {
+	border-top-right-radius: 20px;	
+	border-bottom-right-radius: 20px;
+	font-size: 24px;
+	height: 50px;
+	line-height: 50px;
+	margin: 0 0 30px;
+	-moz-border-radius-topright: 20px;
+	-moz-border-radius-bottomright: 20px;
+	-webkit-border-top-right-radius: 20px;
+	-webkit-border-bottom-right-radius: 20px;
+}
+
+.sidebar ul li.active {
+	background: #F2F2F2;
+}
+
+.sidebar ul li:hover {
+	background: #C4C4C4;
+}
+
+.sidebar ul li a {
+	color: #47834B;
+	display: block;
+	height: 100%;
+	padding-left: 52px;
+	text-decoration: none;
+	width: 100%;
+}
+
+.sidebar ul li.active a {
+	color: #60AA85;	
+}
+
+.sidebar ul li:hover a {
+	color: #A4A875;	
+}
+
+.content {
+	margin-top: 30px;
+}

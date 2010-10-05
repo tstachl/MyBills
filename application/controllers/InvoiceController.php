@@ -24,21 +24,35 @@
  */
 require_once 'MyBills/Controller/Action.php';
 
-class IndexController extends MyBills_Controller_Action
+class InvoiceController extends MyBills_Controller_Action
 {
 
     public function init()
     {
     	Zend_Registry::get('logger')->info(__METHOD__);
-        /* Initialize action controller here */
+    	
+    	$this->view->headTitle('Invoice');
+    	$this->view->headScript()->appendScript('$(function() {$.invoice.init();});');
     }
 
     public function indexAction()
     {
     	Zend_Registry::get('logger')->info(__METHOD__);
     	
-		return $this->_helper->redirector('index', 'invoice');
+		$this->view->title = 'File Invoice';
+		$this->view->invoiceForm = $this->getForm();
+    }
+    
+    public function getForm()
+    {
+    	Zend_Registry::get('logger')->info(__METHOD__);
+    	
+    	return new MyBills_Form_InvoiceForm(array(
+			'action' => '/invoice/new',
+			'method' => 'post',
+			'name'	 => 'invoice_form',
+			'class'	 => 'form'
+    	));
     }
 
 }
-

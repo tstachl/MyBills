@@ -19,9 +19,9 @@
  */
 
 /**
- * @see MyBills_Exception
+ * @see MyBills_Model_Exception
  */
-require_once 'MyBills/Exception.php';
+require_once 'MyBills/Model/Exception.php';
 
-class MyBills_Model_Exception extends MyBills_Exception
+class MyBills_Model_Mapper_Exception extends MyBills_Model_Exception
 {}

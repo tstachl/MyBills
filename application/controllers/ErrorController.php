@@ -5,6 +5,8 @@ class ErrorController extends Zend_Controller_Action
 
     public function errorAction()
     {
+    	Zend_Registry::get('logger')->info(__METHOD__);
+    	
         $errors = $this->_getParam('error_handler');
         
         switch ($errors->type) {
@@ -38,6 +40,8 @@ class ErrorController extends Zend_Controller_Action
 
     public function getLog()
     {
+    	Zend_Registry::get('logger')->info(__METHOD__);
+    	
         $bootstrap = $this->getInvokeArg('bootstrap');
         if (!$bootstrap->hasPluginResource('Log')) {
             return false;

@@ -1,15 +1,16 @@
 #login div.box {
 	background: #F2F2F2;
 	border: #C4C4C4 1px solid;
-	border-radius: 5px;
-	box-shadow: 0 0 20px #C4C4C4;
+	border-radius: 10px;
+	box-shadow: 0 0 30px #C4C4C4;
 	margin-top: 80px;
+	overflow: hidden;
 	padding: 0 26px;
 	width: 228px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-box-shadow: 0 0 20px #C4C4C4;	
-	-webkit-box-shadow: 0 0 20px #C4C4C4;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 30px #C4C4C4;	
+	-webkit-box-shadow: 0 0 30px #C4C4C4;
 }
 
 #login h1 {
@@ -26,61 +27,28 @@
 	color: #47834B;
 }
 
-div.login_form .hint, div.login_form ul.errors {
-	color: #FF0000;
-}
-
-div.login_form div {
-	margin-bottom: 20px;
-}
-
-div.login_form ul.errors,
-div.login_form ul.errors li {
-	list-style: none;
-	margin: 0;
-}
-
-div.login_form ul.errors li {
-	padding: 5px;
-}
-
-div.login_form div.element {
-	background: #E6E6E6;
-	border: #C4C4C4 1px solid;
-	border-radius: 5px;
-	margin-bottom: 0;
-	padding: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-div.login_form input[type=text],
-div.login_form input[type=password] {
-	background: transparent;
-	border: none;
-	color: #C4C4C4;
-	width: 100%;
-}
-
-div.button {
-	background: #E6E6E6;
+#login .form .button {
+	background: #C4C4C4;
 	border: 0;
-	margin: 0 -26px!important;
-	position: relative;
-	width: 280px;
+	border-radius: 0;
+	margin: 0 -26px -20px;
+	padding: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
 }
 
-div.button input,
-div.button button {
-	background: transparent;
-	border: none;
-	color: #60AA85;
-	font-size: 21px;
-	text-align: right;
+#login .form .button input,
+#login .form .button button {
+	background: none;
+	border: 0;
+	color: #47834B;
+	cursor: pointer;
+	margin: 0;
 	padding: 10px;
 	width: 100%;
 }
 
-div.button button {
-	color: #A4A875;	
+#login .form .button input:hover,
+#login .form .button button:hover {
+	color: #FF0000;
 }

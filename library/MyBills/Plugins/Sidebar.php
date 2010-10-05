@@ -13,15 +13,24 @@
  * to license@mybills.cc so we can send you a copy immediately.
  *
  * @category   MyBills
- * @package    MyBills_Model
+ * @package    MyBills
  * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
  * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
  */
 
 /**
- * @see MyBills_Exception
+ * @see Zend_Controller_Plugin_Abstract
  */
-require_once 'MyBills/Exception.php';
+require_once 'Zend/Layout/Controller/Plugin/Layout.php';
 
-class MyBills_Model_Exception extends MyBills_Exception
-{}
+class MyBills_Plugins_Sidebar extends Zend_Layout_Controller_Plugin_Layout
+{
+	
+	public function postDispatch(Zend_Controller_Request_Abstract $request)
+	{
+		$html = '<div class="sidebar grid_5">' . $this->getLayout()->getView()->navigation(Zend_Registry::get('Sidebar'))->menu()->render() . '</div>';
+		$this->getLayout()->sidebar = $html;
+		parent::postDispatch($request);
+	}
+	
+}

@@ -1,0 +1,61 @@
+.form .hint, .form .errors {
+	color: #FF0000;
+}
+
+.form dl dd div {
+	background: #E6E6E6;
+	border: #C4C4C4 1px solid;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.form ul.errors,
+.form ul.errors li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.form ul.errors {
+	margin-top: -20px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+.form dl dt {
+	display: none;
+}
+
+.form dl dd div input[type=text],
+.form dl dd div input[type=password] {
+	background: transparent;
+	border: none;
+	color: #C4C4C4;
+	width: 100%;
+}
+
+.form dl dd.button div.element {
+	background: #A4A875;
+}
+
+.form dl dd.button:hover div.element {
+	background: #47834B;
+}
+
+.form dl dd.button div.element input,
+.form dl dd.button div.element button {
+	background: none;
+	border: none;
+	color: #F2F2F2;
+	font-weight: bolder;
+	width: 100%;
+}
+
+.form dl dd.button div.element,
+.form dl dd.button div.element input,
+.form dl dd.button div.element button {
+	cursor: pointer;
+}

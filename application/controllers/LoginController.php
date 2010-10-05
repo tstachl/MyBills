@@ -24,6 +24,11 @@
  */
 require_once 'Zend/Controller/Action.php';
 
+/**
+ * @see Zend_Auth_Adapter_DbTable
+ */
+require_once 'Zend/Auth/Adapter/DbTable.php';
+
 class LoginController extends Zend_Controller_Action
 {
 	
@@ -40,6 +45,25 @@ class LoginController extends Zend_Controller_Action
 		$this->view->headTitle('Login');
 	}
 	
+	public function preDispatch()
+	{
+    	Zend_Registry::get('logger')->info(__METHOD__);
+    	
+		if (Zend_Auth::getInstance()->hasIdentity()) {
+			// The user is logged in and can be redirected to index
+			// unless he clicked the logout action
+			if ('logout' != $this->getRequest()->getActionName()) {
+			#	$this->_helper->redirector('index', 'index');
+			}
+		} else {
+			// If they aren't logged in they can't logout so we redirect
+			// them to the login form
+			if ('logout' == $this->getRequest()->getActionName()) {
+				$this->_helper->redirector('index');
+			}
+		}
+	}
+	
 	/**
 	 * Login index action adds the form.
 	 * 
@@ -48,9 +72,8 @@ class LoginController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		Zend_Registry::get('logger')->info(__METHOD__);
-		
+				
 		$this->view->form = $this->getForm();
-		
 		return;
 	}
 	
@@ -69,7 +92,18 @@ class LoginController extends Zend_Controller_Action
 			$form = $this->getForm();
 			
 			if ($form->isValid($request->getPost())) {
-				// sorry not valid
+				$adapter = $this->getAuthAdapter($form->getValues());
+				$auth = Zend_Auth::getInstance();
+				$result = $auth->authenticate($adapter);
+				
+				if ($result->isValid()) {
+					$storage = $auth->getStorage();
+					$storage->write($adapter->getResultRowObject(array(
+						'username'
+					)));
+					return $this->_helper->redirector('index', 'index');
+				}
+				
 				$form->setDescription('Invalid credentials provided');
 				$this->view->form = $form;
 				return $this->render('index');
@@ -79,6 +113,19 @@ class LoginController extends Zend_Controller_Action
 			return $this->render('index');
 		}
 		
+		return $this->_helper->redirector('index');
+	}
+	
+	/**
+	 * Clears the Zend_Auth information and redirects to index.
+	 * 
+     * @return void
+	 */
+	public function logoutAction()
+	{
+    	Zend_Registry::get('logger')->info(__METHOD__);
+    	
+		Zend_Auth::getInstance()->clearIdentity();
 		return $this->_helper->redirector('index');
 	}
 	
@@ -94,8 +141,30 @@ class LoginController extends Zend_Controller_Action
 		return new MyBills_Form_LoginForm(array(
 			'action' => '/login/process',
 			'method' => 'post',
-			'name'	 => 'login_form'
+			'name'	 => 'login_form',
+			'class'	 => 'form'
 		));
+	}
+	
+	/**
+	 * The authentication adpater getter.
+	 * 
+	 * @param array $params holding the credentials
+	 */
+	public function getAuthAdapter(array $params)
+	{		
+		$authAdapter = new Zend_Auth_Adapter_DbTable(
+			Zend_Db_Table::getDefaultAdapter(),
+			'user',
+			'username',
+			'password'
+		);
+		
+		$user = new MyBills_Model_UserMapper();
+		$user->findByUsername('thomas@stachl.me');
+		
+		return $authAdapter->setIdentity($params['username'])
+						   ->setCredential(MyBills_Utils::crypt($params['password'], $user->password));
 	}
 
 }

@@ -24,17 +24,45 @@
  */
 require_once 'MyBills/Model/Exception.php';
 
-abstract class MyBills_Model
+class MyBills_Model
 {
+	
+	public function __construct(array $options = null)
+	{
+		if (is_array($options)) {
+			$this->setOptions($options);
+		}
+	}
+	
+	public function __set($name, $value)
+	{
+		$method = 'set' . $name;
+		if (('mapper' == $name) || !method_exists($this, $method)) {
+			throw new MyBills_Model_Exception('Invalid ' . get_class($this) . ' property');
+		}
+		$this->$method($value);
+		return $this;
+	}
 	
 	public function __get($name)
 	{
-		
+		$method = 'get' . $name;
+		if (('mapper' == $name) || !method_exists($this, $method)) {
+			throw new MyBills_Model_Exception('Invalid ' . get_class($this) . ' property');
+		}
+		return $this->$method();
 	}
 	
-	public function __set()
+	public function setOptions($options)
 	{
-		
+		$methods = get_class_methods($this);
+		foreach ($options as $key => $value) {
+			$method = 'set' . ucfirst($key);
+			if (in_array($method, $methods)) {
+				$this->$method($value);
+			}
+		}
+		return $this;
 	}
 	
 }

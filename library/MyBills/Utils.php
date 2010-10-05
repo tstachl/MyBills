@@ -13,15 +13,27 @@
  * to license@mybills.cc so we can send you a copy immediately.
  *
  * @category   MyBills
- * @package    MyBills_Model
+ * @package    MyBills_Utils
  * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
  * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
  */
 
-/**
- * @see MyBills_Exception
- */
-require_once 'MyBills/Exception.php';
-
-class MyBills_Model_Exception extends MyBills_Exception
-{}
+class MyBills_Utils
+{
+	
+	public static function crypt($clear, $hash = null)
+	{
+		$config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV);
+		
+		if (null === $hash) {
+			for ($salt = '', $x = 0; $x < $config->crypt->saltlength; $x++) {
+				$salt .= bin2hex(chr(mt_rand(0, 255)));
+			}
+		} else {
+			$salt = substr($hash, 0, $config->crypt->saltlength * 2);
+		}
+		
+		return $salt . hash('sha512', $config->crypt->staticsalt . $clear . $salt);
+	}
+	
+}

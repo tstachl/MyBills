@@ -16,6 +16,14 @@ a:focus {
 	outline: 1px dotted;
 }
 
+a, a:visited, a:active, a:hover {
+	color: #47834B;
+}
+
+a:hover, a:focus {
+	text-decoration: none;
+}
+
 hr {
 	border: 0 #ccc solid;
 	border-top-width: 1px;
@@ -25,6 +33,10 @@ hr {
 
 /* `Headings
 ----------------------------------------------------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+	color: #47834B;
+}
 
 h1 {
 	font-size: 25px;

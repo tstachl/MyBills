@@ -7,10 +7,14 @@
 	</head>
 	<body>
 		<div id="wrapper" class="container_16">
-			<?php echo $this->partial('header.phtml') ?>
+			<?php echo $this->render('header.phtml') ?>
 			<?php echo $this->layout()->sidebar ?>
-			<?php echo $this->layout()->content ?>
-			<?php echo $this->partial('footer.phtml') ?>
+			<?php #echo $this->partial('sidebar.phtml') ?>
+			<div class="content grid_11">
+				<?php echo $this->layout()->content ?>
+			</div>
+			<div class="clear"></div>
+			<?php echo $this->render('footer.phtml') ?>
 		</div>
 		<?php echo $this->headScript() ?>
 	</body>

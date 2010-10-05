@@ -13,15 +13,15 @@
  * to license@mybills.cc so we can send you a copy immediately.
  *
  * @category   MyBills
- * @package    MyBills_Model
+ * @package    MyBills_Utils
  * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
  * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
  */
 
 /**
- * @see MyBills_Exception
+ * @see Zend_Exception
  */
 require_once 'MyBills/Exception.php';
 
-class MyBills_Model_Exception extends MyBills_Exception
+class MyBills_Utils_Exception extends MyBills_Exception
 {}

@@ -13,7 +13,7 @@
  * to license@mybills.cc so we can send you a copy immediately.
  *
  * @category   MyBills
- * @package    MyBills_Model
+ * @package    MyBills
  * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
  * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
  */
@@ -23,5 +23,5 @@
  */
 require_once 'MyBills/Exception.php';
 
-class MyBills_Model_Exception extends MyBills_Exception
+class MyBills_Plugins_Exception extends MyBills_Exception
 {}

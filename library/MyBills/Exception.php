@@ -13,22 +13,15 @@
  * to license@mybills.cc so we can send you a copy immediately.
  *
  * @category   MyBills
- * @package    MyBills_Model
+ * @package    MyBills
  * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
  * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
- * @author     tstachl
  */
 
 /**
- * @see MyBills_Model
+ * @see Zend_Exception
  */
-require_once 'MyBills/Model.php';
+require_once 'Zend/Exception.php';
 
-class MyBills_Model_User
-{
-	
-	protected $_uuid;
-	protected $_username;
-	protected $_password;
-	
-}
+class MyBills_Exception extends Zend_Exception
+{}

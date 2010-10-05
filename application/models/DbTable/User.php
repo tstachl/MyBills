@@ -13,15 +13,20 @@
  * to license@mybills.cc so we can send you a copy immediately.
  *
  * @category   MyBills
- * @package    MyBills_Model
+ * @package    MyBills_Model_DbTable
  * @copyright  Copyright (c) 2010 MyBills.cc (http://www.mybills.cc)
  * @license    http://creativecommons.org/licenses/GPL/2.0/     CC-GNU GPL License
+ * @author     tstachl
  */
 
 /**
- * @see MyBills_Exception
+ * @see Zend_Db_Table_Abstract
  */
-require_once 'MyBills/Exception.php';
+require_once 'Zend/Db/Table/Abstract.php';
 
-class MyBills_Model_Exception extends MyBills_Exception
-{}
+class MyBills_Model_DbTable_User extends Zend_Db_Table_Abstract
+{
+
+	public $_name = 'user';
+	
+}
