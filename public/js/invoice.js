@@ -1,44 +1,5 @@
 //$('#product-element *').removeAttr('id');
 //$($('#product-element fieldset')[0]).clone(true).appendTo('#product-element');
-$.fn.priceFormat = function(options) {
-    
-    var defaultOptions = {
-        groupSeparator: ",",
-        decimalSeparator: "."
-    }
-    
-    // default options
-    options = $.extend({}, defaultOptions, options);
-    
-    var formatValue = function(val) {
-        if (isNaN(val)) return 0.00;
-        val = Number(val).toFixed(2);
-        var p = String(val).split(options.decimalSeparator);
-        
-        var intPart = "";
-        
-        for (var i = 3, t = p[0].length; i < t + 3; i+= 3) {
-            intPart = p[0].slice(-3) + options.groupSeparator + intPart;        
-            p[0] = p[0].substring(0, t-i);
-        }
-        
-        // remove extra comma,
-        p[0] = intPart.substring(0, intPart.length-1);        
-                
-        return p.join(options.decimalSeparator);
-    }
-    
-    this.each(function(i, e) {
-        e = $(e);
-        if ($.inArray(e.attr("tagName"), ["INPUT", "TEXTAREA"]) !== -1) {
-           e.val(formatValue(e.val()));
-        } else {
-           e.text(formatValue(e.text()));
-        }
-    });
-    
-    return this;
-};
 $.isNumeric = function(v) {
 	var validChars = '0123456789.,';
 	var r = true;
@@ -51,10 +12,6 @@ $.isNumeric = function(v) {
 };
 $.invoice = {
 	productElements: null,
-	priceFormatOptions: {
-	    groupSeparator: ",",
-	    decimalSeparator: "."
-	},
 	init: function() {
 		var self = this;
 		
@@ -71,7 +28,9 @@ $.invoice = {
 		});
 		
 		$('#product-element .product_price input').focus(function() {
-			self.removePriceFormat($(this));
+			$(this).toNumber();
+		}).blur(function() {
+			$(this).formatCurrency();
 		});
 		
 		$('#product-element .product_price input').change(function() {
@@ -92,16 +51,7 @@ $.invoice = {
 		self.productElements.clone(true).appendTo('#product-element');
 	},
 	priceFormat: function(el) {
-		return el.css('text-align', 'right').priceFormat($.invoice.priceFormatOptions);
-	},
-	removePriceFormat: function(el) {
-		var val = el.val().replace($.invoice.priceFormatOptions.groupSeparator, '');
-		
-		if ($.invoice.priceFormatOptions.decimalSeparator != '.') {
-			val.replace($.invoice.priceFormatOptions.decimalSeparator, '.');
-		}
-
-		return val;
+		return el.css('text-align', 'right').formatCurrency();
 	},
 	recalculate: function(self) {
 		var sum = 0;
@@ -110,8 +60,8 @@ $.invoice = {
 		
 		$.each($('#product-element fieldset'), function(i, v) {
 			var pieces = ($.isNumeric($(v).find('.product_pieces input').val()) ? $(v).find('.product_pieces input').val() : 0);
-			var priceNum = self.removePriceFormat($(v).find('.product_price input'));
-			var price = ($.isNumeric(priceNum) ? priceNum : 0);
+			var price = ($.isNumeric($(v).find('.product_price input').toNumber().val()) ? $(v).find('.product_price input').toNumber().val() : 0);
+			$(v).find('.product_price input').formatCurrency();
 			sum = sum + (pieces * price);
 		});
 		

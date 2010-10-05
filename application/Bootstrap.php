@@ -107,6 +107,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		
 		$view->headScript()->appendFile('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'text/javascript')
 						   ->appendFile($view->baseUrl() . '/js/jquery.tiptip.min.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/jquery.formatCurrency-1.4.0.min.js', 'text/javascript')
 						   ->appendFile($view->baseUrl() . '/js/forms.js', 'text/javascript')
 						   ->appendFile($view->baseUrl() . '/js/invoice.js', 'text/javascript');
 						   
