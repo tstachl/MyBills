@@ -48,4 +48,17 @@ class MyBills_Controller_Action extends Zend_Controller_Action
 		parent::preDispatch();
 	}
 	
+	public function output($output, $format = 'json')
+	{
+		switch ($format) {
+			case 'json':
+			default:
+				$this->getResponse()
+						->setHeader('Content-type', 'application/json')
+						->sendResponse();
+				echo Zend_Json::encode($output);
+				break;
+		}
+	}
+	
 }

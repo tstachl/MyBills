@@ -105,8 +105,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 						 ->appendName('copyright', '2010 by Thomas Stachl')
 						 ->appendName('description', 'The easy billing and invoicing system.');
 		
-		$view->headScript()->appendFile($view->baseUrl() . '/js/mootools-dev-1.2.5.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/mootools.extensions.js', 'text/javascript')
+		$view->headScript()->appendFile($view->baseUrl() . '/js/library/mootools-dev-1.2.5.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/library/mootools.extensions.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/library/jstorage.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/library/autocomplete.js', 'text/javascript')
 						   ->appendFile($view->baseUrl() . '/js/MyBills.js', 'text/javascript')
 						   ->appendFile($view->baseUrl() . '/js/MyBills/Forms.js', 'text/javascript')
 						   ->appendFile($view->baseUrl() . '/js/MyBills/Controllers/Invoice.js', 'text/javascript');

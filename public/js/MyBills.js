@@ -46,13 +46,7 @@ var MyBills = new Class({
 	},
 	
 	run: function() {
-		var controller = this.getControllerNamespace() + this.ucfirst(this.getControllerName());
+		var controller = this.getControllerNamespace() + this.getControllerName().ucfirst();
 		this.setController(new window[controller]);
-	},
-	
-	ucfirst: function (str) {
-	    str += '';
-	    var f = str.charAt(0).toUpperCase();
-	    return f + str.substr(1);
 	}
 });

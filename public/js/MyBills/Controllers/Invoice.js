@@ -3,11 +3,50 @@ var MyBills_Controllers_Invoice = new Class({
 	
 	initialize: function() {
 		this.addEvents();
+		this.initDataStores();
+		this.initComponents();
+	},
+	
+	initDataStores: function() {
+		if (null === $.jStorage.get('countries')) {
+			var request = new Request.JSON({
+				url: '/contact/countries',
+				onComplete: function(json) {
+					$.jStorage.set('countries', json);
+				}
+			}).send();
+		}
+	},
+	
+	initComponents: function() {
+		var size = $('contact').setStyle('display', 'inline').getSize().x;
+		$('contact').setStyle('display', 'none').autocomplete({
+			id: 'iso',
+			filter: 'name',
+			store: 'countries',
+			show: ['name'],
+			delimiter: ', ',
+			styles: {
+				width: size
+			}
+		});
 	},
 	
 	clone: function() {
 		this.row.clone().cloneEventsDeep(this.row).inject($('product-element').getLast('fieldset'), 'after');
 		$('product-element').getLast('fieldset').getElement('input[name=units]').getNext().focus();
+		var name = $('product-element').getLast('fieldset').getElement('input[name=name]');
+		var size = name.setStyle('display', 'inline').getSize().x;
+		name.setStyle('display', 'none').autocomplete({
+			id: 'iso',
+			filter: 'name',
+			store: 'countries',
+			show: ['name'],
+			delimiter: ', ',
+			styles: {
+				width: size
+			}
+		});
 	},
 	
 	addEvents: function() {
@@ -28,6 +67,7 @@ var MyBills_Controllers_Invoice = new Class({
 			},
 			focus: this.setCleanNumber
 		});
+		
 		price.addEvents({
 			change: function() {
 				if (this.get('value').isNumeric()) {
@@ -41,6 +81,18 @@ var MyBills_Controllers_Invoice = new Class({
 		});
 		
 		this.row = $('product-element').getFirst('fieldset').clone().cloneEventsDeep($('product-element').getFirst('fieldset'));
+		
+		var size = name.setStyle('display', 'inline').getSize().x;
+		name.setStyle('display', 'none').autocomplete({
+			id: 'iso',
+			filter: 'name',
+			store: 'countries',
+			show: ['name'],
+			delimiter: ', ',
+			styles: {
+				width: size
+			}
+		});
 		
 		$('tax').addEvents({
 			change: function() {

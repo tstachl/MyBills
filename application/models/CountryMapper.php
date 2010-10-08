@@ -24,26 +24,27 @@
  */
 require_once 'MyBills/Model/Mapper.php';
 
-class MyBills_Model_UserMapper extends MyBills_Model_Mapper
+class MyBills_Model_CountryMapper extends MyBills_Model_Mapper
 {
 	
-	public function save(MyBills_Model_User $user)
+	public function save(MyBills_Model_Country $country)
 	{
     	Zend_Registry::get('logger')->info(__METHOD__);
     	
 		$data = array(
-			'username' => $user->getUsername(),
-			'password' => $user->getPassword()
+			'iso'	=> $country->getIso(),
+			'name'	=> $country->getName(),
+			'iso3'	=> $country->getIso3()
 		);
 		
-		if (null === ($uuid = $user->getUuid())) {
+		if (null === $this->findById($country->getIso())) {
 			return $this->getDbTable()->insert($data);
 		} else {
-			return $this->getDbTable()->update($data, array('uuid = ?' => $uuid));
+			return $this->getDbTable()->update($data, array('iso = ?' => $country->getIso()));
 		}
 	}
 	
-	public function findByUsername($username, $model = null)
+	public function findByName($name, $model = null)
 	{
     	Zend_Registry::get('logger')->info(__METHOD__);
     	
@@ -53,7 +54,7 @@ class MyBills_Model_UserMapper extends MyBills_Model_Mapper
 		}
 		
 		$row = $this->getDbTable()->fetchRow(
-			$this->getDbTable()->select()->where('username = ?', $username)
+			$this->getDbTable()->select()->where('name = ?', $name)
 		);
 		
 		if (null === $row) {

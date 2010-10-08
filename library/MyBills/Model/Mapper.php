@@ -89,14 +89,18 @@ class MyBills_Model_Mapper
 		return $this->_model;
 	}
 	
-	public function fetchAll()
+	public function fetchAll($toArray = false)
 	{
 		$resultSet = $this->getDbTable()->fetchAll();
 		$entries = array();
 		foreach ($resultSet as $row) {
-			$entry = $this->guessModel();
-			$entry = new $entry();
-			$entries[] = $entry->setOptions($row->toArray());
+			if ($toArray) {
+				$entries[] = $row->toArray();
+			} else {
+				$entry = $this->guessModel();
+				$entry = new $entry();
+				$entries[] = $entry->setOptions($row->toArray());
+			}
 		}
 		return $entries;
 	}

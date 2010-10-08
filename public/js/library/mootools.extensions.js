@@ -1,3 +1,4 @@
+
 Native.implement([Element, Window, Document], {
 	cloneEventsDeep: function(from, type){
 		if (this.getChildren().length > 0) {
@@ -27,6 +28,10 @@ String.implement({
 	},
 	removeNumberFormat: function() {
 		return this.replace(new RegExp("[^\\d.-]", "g"), '').toFloat();
+	},
+	ucfirst: function() {
+	    var f = this.charAt(0).toUpperCase();
+	    return f + this.substr(1);
 	}
 });
 
@@ -42,5 +47,12 @@ Number.implement({
 		var remainder = matches[2].length > 3 ? matches[2].length % 3 : 0;
 		return front_sign + (matches[1] ? matches[1] : '') + (remainder ? matches[2].substr(0, remainder) + thousands_sep : '') + 
 				matches[2].substr(remainder).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep) + (decimals ? dec_point + (+matches[3] || 0).toFixed(decimals).substr(2) : '') + back_sign;
+	}
+});
+
+Element.implement({
+	autocomplete: function(options) {
+		new MyBills_Library_Autocomplete(this, options);
+		return this;
 	}
 });
