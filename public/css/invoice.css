@@ -3,53 +3,52 @@
 	margin-bottom: 20px;
 }
 
-#product-element fieldset dl,
-#taxstuff-element fieldset dl {
+#product-element dl,
+#taxstuff-element dl {
 	clear: both;
 }
 
-#product-element fieldset dd.product_pieces,
-#product-element fieldset dd.product_name,
-#product-element fieldset dd.product_price {
+#product-element dd {
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 0;
 }
 
-#product-element fieldset dd.product_pieces div,
-#product-element fieldset dd.product_name div,
-#product-element fieldset dd.product_price div,
-#taxstuff-element fieldset dd.tax_tax div,
-#taxstuff-element fieldset dd.tax_taxsum div {
+#product-element dd div,
+#taxstuff-element dd div {
 	margin-bottom: 0;
 }
 
-#product-element fieldset dd.product_pieces {
+#product-element dd.product_units {
 	width: 60px;
 }
 
-#product-element fieldset dd.product_name {
+#product-element dd.product_name {
 	width: 438px;
 }
 
-#product-element fieldset dd.product_price {
+#product-element dd.product_price {
 	margin-right: 0;
 	width: 100px;
 }
 
+input[name=price],
+input[name=taxsum],
+input[name=sum] {
+	text-align: right;
+}
 
-
-#taxstuff-element fieldset dd.tax_tax {
-	float: right;
+#taxstuff-element dd.tax_tax {
+	float: left;
 	margin-bottom: 0;
+	margin-left: 457px;
+	margin-right: 20px;
 	width: 60px;
 }
 
-#taxstuff-element fieldset dd.tax_taxsum {
-	float: right;
+#taxstuff-element dd.tax_taxsum {
+	float: left;
 	margin-bottom: 0;
-	margin-left: 20px;
-	margin-right: 2px;
 	width: 100px;
 }
 

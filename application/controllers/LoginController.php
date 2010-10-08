@@ -22,14 +22,14 @@
 /**
  * @see Zend_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'MyBills/Controller/Action.php';
 
 /**
  * @see Zend_Auth_Adapter_DbTable
  */
 require_once 'Zend/Auth/Adapter/DbTable.php';
 
-class LoginController extends Zend_Controller_Action
+class LoginController extends MyBills_Controller_Action
 {
 	
 	/**
@@ -39,10 +39,9 @@ class LoginController extends Zend_Controller_Action
 	 */
 	public function init()
 	{
-		Zend_Registry::get('logger')->info(__METHOD__);
-		
+		Zend_Registry::get('logger')->info(__METHOD__);		
 		$this->_helper->layout->setLayout('standalone');
-		$this->view->headTitle('Login');
+		parent::init();
 	}
 	
 	public function preDispatch()

@@ -30,9 +30,7 @@ class InvoiceController extends MyBills_Controller_Action
     public function init()
     {
     	Zend_Registry::get('logger')->info(__METHOD__);
-    	
-    	$this->view->headTitle('Invoice');
-    	$this->view->headScript()->appendScript('$(function() {$.invoice.init();});');
+    	parent::init();
     }
 
     public function indexAction()

@@ -25,10 +25,21 @@ require_once 'Zend/Controller/Action.php';
 
 class MyBills_Controller_Action extends Zend_Controller_Action
 {
+	public function init()
+	{
+		$this->view->headScript()->appendScript('
+			window.addEvent("domready", function() {
+				window.application = new MyBills("' . $this->getRequest()->getControllerName() . '");
+				application.run();
+			});
+		');
+		$this->view->headTitle(ucfirst($this->getRequest()->getControllerName()));
+		parent::init();
+	}
 	
 	public function preDispatch()
 	{
-		if (!Zend_Auth::getInstance()->hasIdentity()) {
+		if (!Zend_Auth::getInstance()->hasIdentity() && ($this->getRequest()->getControllerName() !== 'login')) {
 			// If they aren't logged in they can't logout so we redirect
 			// them to the login form
 			$this->_helper->redirector('index', 'login');

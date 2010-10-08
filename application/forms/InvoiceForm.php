@@ -49,15 +49,15 @@ class MyBills_Form_InvoiceForm extends Zend_Form
 			'required'		=> true
 		));
 		
-		$pieces = $this->addElement('text', 'pieces', array(
+		$pieces = $this->addElement('text', 'units', array(
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Number of items to account')),
-				array('HtmlTag', array('tag' => 'dd', 'class' => 'product_pieces')),
+				array('HtmlTag', array('tag' => 'dd', 'class' => 'product_units')),
 				array('Label', array('tag' => 'dt')),
 				'Errors'
 			),
-			'label'			=> 'Items',
+			'label'			=> 'Units',
 			'validators'	=> array('Digits'),
 			'required'		=> true
 		));
@@ -88,7 +88,7 @@ class MyBills_Form_InvoiceForm extends Zend_Form
 			'required'		=> true
 		));
 		
-		$product = $this->addDisplayGroup(array('pieces', 'name', 'price'), 'product');
+		$product = $this->addDisplayGroup(array('units', 'name', 'price'), 'product');
 		
 		$tax = $this->addElement('text', 'tax', array(
 			'decorators'	=> array(
@@ -117,7 +117,7 @@ class MyBills_Form_InvoiceForm extends Zend_Form
 			'required'		=> true
 		));
 		
-		$taxgroup = $this->addDisplayGroup(array('taxsum', 'tax'), 'taxstuff');
+		$taxgroup = $this->addDisplayGroup(array('tax', 'taxsum'), 'taxstuff');
 		
 		$sum = $this->addElement('text', 'sum', array(
 			'decorators'	=> array(
@@ -141,18 +141,6 @@ class MyBills_Form_InvoiceForm extends Zend_Form
 				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Create Invoice',
-			'ignore'		=> true,
-			'required'		=> false
-		));
-		
-		$newbutton = $this->addElement('button', 'newrow', array(
-			'decorators'	=> array(
-				'ViewHelper',
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Click here to create a new product row')),
-				array('HtmlTag', array('tag' => 'dd', 'class' => 'button')),
-				array('Label', array('tag' => 'dt'))
-			),
-			'label'			=> 'New Row',
 			'ignore'		=> true,
 			'required'		=> false
 		));

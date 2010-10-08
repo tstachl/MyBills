@@ -105,11 +105,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 						 ->appendName('copyright', '2010 by Thomas Stachl')
 						 ->appendName('description', 'The easy billing and invoicing system.');
 		
-		$view->headScript()->appendFile('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/jquery.tiptip.min.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/jquery.formatCurrency-1.4.0.min.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/forms.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/invoice.js', 'text/javascript');
+		$view->headScript()->appendFile($view->baseUrl() . '/js/mootools-dev-1.2.5.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/mootools.extensions.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Forms.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Controllers/Invoice.js', 'text/javascript');
 						   
 		$view->headTitle('MyBills.cc')->setSeparator(' - ')
 									  ->setDefaultAttachOrder(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);

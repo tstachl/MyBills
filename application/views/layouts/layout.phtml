@@ -1,9 +1,10 @@
 <?php echo $this->doctype() ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 	<head>
 		<?php echo $this->headMeta() ?>
 		<?php echo $this->headTitle() ?>
 		<?php echo $this->headLink() ?>
+		<?php echo $this->headScript() ?>
 	</head>
 	<body>
 		<div id="wrapper" class="container_16">
@@ -16,6 +17,5 @@
 			<div class="clear"></div>
 			<?php echo $this->render('footer.phtml') ?>
 		</div>
-		<?php echo $this->headScript() ?>
 	</body>
 </html>

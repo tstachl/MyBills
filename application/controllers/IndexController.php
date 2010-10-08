@@ -30,7 +30,6 @@ class IndexController extends MyBills_Controller_Action
     public function init()
     {
     	Zend_Registry::get('logger')->info(__METHOD__);
-        /* Initialize action controller here */
     }
 
     public function indexAction()
