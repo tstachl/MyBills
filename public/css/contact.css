@@ -1,0 +1,50 @@
+dd.contact.firstname,
+dd.contact.name,
+dd.contact.street,
+dd.contact.streetadd,
+dd.contact.city,
+dd.contact.state,
+dd.contact.zip,
+dd.contact.email,
+dd.contact.phone,
+dd.contact.fax {
+	float:left;
+}
+
+dd.contact.firstname,
+dd.contact.name,
+dd.contact.street,
+dd.contact.streetadd {
+	width: 310px;
+}
+
+dd.contact.name,
+dd.contact.streetadd,
+dd.contact.state,
+dd.contact.zip,
+dd.contact.phone,
+dd.contact.fax {
+	margin-left: 20px;
+}
+
+dd.contact.country {
+	clear: left;
+}
+
+dd.contact.email,
+dd.contact.phone,
+dd.contact.fax {
+	width: 200px;
+}
+
+dd.contact.city {
+	width: 370px;
+}
+
+dd.contact.state {
+	width: 170px;
+}
+
+dd.contact.zip {
+	width: 60px;
+}

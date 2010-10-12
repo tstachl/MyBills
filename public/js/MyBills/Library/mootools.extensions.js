@@ -54,5 +54,11 @@ Element.implement({
 	autocomplete: function(options) {
 		new MyBills_Library_Autocomplete(this, options);
 		return this;
+	},
+	hide: function() {
+		return this.setStyle('display', 'none');
+	},
+	show: function() {
+		return this.setStyle('display', 'inline');
 	}
 });

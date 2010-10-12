@@ -24,7 +24,7 @@
  */
 require_once 'MyBills/Controller/Action.php';
 
-class ContactController extends MyBills_Controller_Action
+class ContactsController extends MyBills_Controller_Action
 {
 	
     public function init()
@@ -35,7 +35,10 @@ class ContactController extends MyBills_Controller_Action
     
     public function indexAction()
     {
+    	Zend_Registry::get('logger')->info(__METHOD__);
     	
+		$this->view->title = 'Your Contacts';
+		$this->view->contactForm = $this->getForm();
     }
     
     public function countriesAction()
@@ -47,6 +50,18 @@ class ContactController extends MyBills_Controller_Action
     	$countries = $countryMapper->fetchAll(true);
     	
     	$this->output($countries, 'json');
+    }
+    
+    public function getForm()
+    {
+    	Zend_Registry::get('logger')->info(__METHOD__);
+    	
+    	return new MyBills_Form_ContactForm(array(
+			'action' => '/contacts/new',
+			'method' => 'post',
+			'name'	 => 'contact_form',
+			'class'	 => 'form'
+    	));
     }
 	
 }

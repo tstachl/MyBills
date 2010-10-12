@@ -91,11 +91,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 						 ->appendStylesheet($view->baseUrl() . '/css/text.css')
 						 ->appendStylesheet($view->baseUrl() . '/css/960.css')
 						 ->appendStylesheet($view->baseUrl() . '/css/forms.css')
-						 ->appendStylesheet($view->baseUrl() . '/css/tiptip.css');
+						 ->appendStylesheet($view->baseUrl() . '/css/tooltip.css');
 						 
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$view->headLink()->appendStylesheet($view->baseUrl() . '/css/base.css')
-							 ->appendStylesheet($view->baseUrl() . '/css/invoice.css');
+							 ->appendStylesheet($view->baseUrl() . '/css/invoice.css')
+							 ->appendStylesheet($view->baseUrl() . '/css/contact.css');
 		} else {
 			$view->headLink()->appendStylesheet($view->baseUrl() . '/css/login.css');
 		}
@@ -105,13 +106,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 						 ->appendName('copyright', '2010 by Thomas Stachl')
 						 ->appendName('description', 'The easy billing and invoicing system.');
 		
-		$view->headScript()->appendFile($view->baseUrl() . '/js/library/mootools-dev-1.2.5.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/library/mootools.extensions.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/library/jstorage.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/library/autocomplete.js', 'text/javascript')
+		$view->headScript()->appendFile($view->baseUrl() . '/js/MyBills/Library/mootools-dev-1.2.5.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Library/mootools.extensions.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Library/jstorage.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Library/Autocomplete.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Library/Tooltip.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Library/Forms.js', 'text/javascript')
 						   ->appendFile($view->baseUrl() . '/js/MyBills.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/MyBills/Forms.js', 'text/javascript')
-						   ->appendFile($view->baseUrl() . '/js/MyBills/Controllers/Invoice.js', 'text/javascript');
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Controllers/Invoice.js', 'text/javascript')
+						   ->appendFile($view->baseUrl() . '/js/MyBills/Controllers/Contacts.js', 'text/javascript');
 						   
 		$view->headTitle('MyBills.cc')->setSeparator(' - ')
 									  ->setDefaultAttachOrder(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);

@@ -1,4 +1,4 @@
-var MyBills_Forms = new Class({
+var MyBills_Library_Forms = new Class({
 	
 	borderOnChangeColor: '#FF0000',
 	borderChangedColor: '#47834B',

@@ -10,7 +10,7 @@ var MyBills_Controllers_Invoice = new Class({
 	initDataStores: function() {
 		if (null === $.jStorage.get('countries')) {
 			var request = new Request.JSON({
-				url: '/contact/countries',
+				url: '/contacts/countries',
 				onComplete: function(json) {
 					$.jStorage.set('countries', json);
 				}

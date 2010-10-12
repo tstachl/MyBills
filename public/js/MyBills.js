@@ -2,7 +2,7 @@ var MyBills = new Class({
 	/* static information about this application */
 	version: '0.1',
 	name: 'MyBills.cc',
-	autoload: ['MyBills_Forms'],
+	autoload: ['MyBills_Library_Forms', 'MyBills_Library_Tooltip'],
 	controllerNamespace: 'MyBills_Controllers_',
 	
 	/* dynamic information about the current initialization */
@@ -19,7 +19,7 @@ var MyBills = new Class({
 	},
 	load: function() {
 		this.autoload.each(function(item) {
-			new window[item]();
+			this[item] = new window[item]();
 		});
 	},
 	
