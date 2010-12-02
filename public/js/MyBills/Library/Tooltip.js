@@ -167,7 +167,7 @@ var MyBills_Library_Tooltip = new Class({
 		this.changeHolder(marg_left, marg_top, t_class);
 		
 		if (this.timeout){ clearTimeout(this.timeout); }
-		this.timeout = setTimeout(function(){ this.holderDiv.show().fade('in'); }.bind(this), this.options.delay);	
+		this.timeout = setTimeout(function(){ this.holderDiv.fade('in'); }.bind(this), this.options.delay);	
        	
 	},
 	hide: function(item) {

@@ -68,7 +68,8 @@ class MyBills_Form_LoginForm extends Zend_Form
 			'label'			=> 'Username',
 			'filter'		=> array('StringTrim', 'StringToLower'),
 			'validators'	=> array('EmailAddress'),
-			'required'		=> true
+			'required'		=> true,
+			'attribs'		=> array('validators' => 'EmailAddress')
 		));
 				
 		$password = $this->addElement('password', 'password', array(

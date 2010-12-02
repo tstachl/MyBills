@@ -30,50 +30,75 @@ class MyBills_Model_User extends MyBills_Model
 	protected $_uuid;
 	protected $_username;
 	protected $_password;
+	protected $_contact;
+	protected $_created;
+	protected $_updated;
 	
 	public function getUuid()
 	{
-    	Zend_Registry::get('logger')->info(__METHOD__);
-    	
-		return $this->_uuid;
+    	return $this->_uuid;
 	}
 
 	public function setUuid($_uuid)
 	{
-    	Zend_Registry::get('logger')->info(__METHOD__);
-    	
 		$this->_uuid = $_uuid;
 		return $this;
 	}
 
 	public function getUsername()
 	{
-    	Zend_Registry::get('logger')->info(__METHOD__);
-    	
 		return $this->_username;
 	}
 
 	public function setUsername($_username)
 	{
-    	Zend_Registry::get('logger')->info(__METHOD__);
-    	
 		$this->_username = $_username;
 		return $this;
 	}
 
 	public function getPassword()
 	{
-    	Zend_Registry::get('logger')->info(__METHOD__);
-    	
 		return $this->_password;
 	}
 
 	public function setPassword($_password)
 	{
-    	Zend_Registry::get('logger')->info(__METHOD__);
-    	
 		$this->_password = $_password;
 		return $this;
 	}
 	
+	public function getContact()
+	{
+		return $this->_contact;
+	}
+
+	public function setContact($_contact)
+	{
+		$contactMapper = new MyBills_Model_ContactMapper();
+		$this->_contact = $contactMapper->findById($_contact);
+		return $this;
+	}
+
+	public function getCreated()
+	{
+		return $this->_created;
+	}
+
+	public function setCreated($_created)
+	{
+		$this->_created = $_created;
+		return $this;
+	}
+
+	public function getUpdated()
+	{
+		return $this->_updated;
+	}
+
+	public function setUpdated($_updated)
+	{
+		$this->_updated = $_updated;
+		return $this;
+	}
+
 }

@@ -36,9 +36,30 @@ class ContactsController extends MyBills_Controller_Action
     public function indexAction()
     {
     	Zend_Registry::get('logger')->info(__METHOD__);
-    	
+    	 	
 		$this->view->title = 'Your Contacts';
 		$this->view->contactForm = $this->getForm();
+		$this->render();
+		return $this->render('new');
+    }
+    
+    public function newAction()
+    {
+		Zend_Registry::get('logger')->info(__METHOD__);
+		
+		$request = $this->getRequest();
+		$form = $this->getForm();
+		
+		if ($request->isPost()) {
+			if ($form->isValid($request->getPost())) {
+				var_dump($request->getPost());
+			}
+			
+			$form->setDescription('The form is not valid');
+		}
+		
+		$this->view->contactForm = $form;
+		return $this->render();
     }
     
     public function countriesAction()
@@ -49,7 +70,18 @@ class ContactsController extends MyBills_Controller_Action
     	$countryMapper = new MyBills_Model_CountryMapper();
     	$countries = $countryMapper->fetchAll(true);
     	
-    	$this->output($countries, 'json');
+    	return $this->output($countries, 'json');
+    }
+    
+    public function statesAction()
+    {
+    	$this->_helper->layout()->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	
+    	$stateMapper = new MyBills_Model_StateMapper();
+    	$states = $stateMapper->fetchAll(true);
+    	
+    	return $this->output($states, 'json');
     }
     
     public function getForm()

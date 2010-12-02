@@ -40,12 +40,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Leave it empty for companies')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact firstname')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Firstname',
-			'validators'	=> array('Alnum'),
 			'required'		=> false
 		));
 		
@@ -53,12 +52,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Enter the company or contact name')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact name')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Name',
-			'validators'	=> array('Alnum'),
 			'required'		=> true
 		));
 		
@@ -66,12 +64,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'The street address')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact street')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Street',
-			'validators'	=> array('Alnum'),
 			'required'		=> true
 		));
 		
@@ -79,12 +76,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Additional street information')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact streetadd')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Street Line 2',
-			'validators'	=> array('Alnum'),
 			'required'		=> false
 		));
 		
@@ -92,12 +88,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'The city name')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact city')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'City',
-			'validators'	=> array('Alnum'),
 			'required'		=> true
 		));
 		
@@ -105,12 +100,12 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Type ahead to see a list')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact state')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
+			'readonly'		=> 'readonly',
 			'label'			=> 'State',
-			'validators'	=> array('Alnum'),
 			'required'		=> false
 		));
 		
@@ -118,12 +113,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'The postal or zip code')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact zip')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Zip',
-			'validators'	=> array('Alnum'),
 			'required'		=> true
 		));
 		
@@ -131,9 +125,9 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Type ahead to see a list')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact country')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Country',
 			'validators'	=> array('Alnum'),
@@ -144,12 +138,12 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Valid email address')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact email')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Email',
-			'validators'	=> array('Alnum'),
+			'validators'	=> array('EmailAddress'),
 			'required'		=> true
 		));
 		
@@ -157,12 +151,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Land line or cell phone number')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact phone')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Phone',
-			'validators'	=> array('Alnum'),
 			'required'		=> false
 		));
 		
@@ -170,12 +163,11 @@ class MyBills_Form_ContactForm extends Zend_Form
 			'decorators'	=> array(
 				'ViewHelper',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element', 'title' => 'Fax number')),
+				'Errors',
 				array('HtmlTag', array('tag' => 'dd', 'class' => 'contact fax')),
-				array('Label', array('tag' => 'dt')),
-				'Errors'
+				array('Label', array('tag' => 'dt'))
 			),
 			'label'			=> 'Fax',
-			'validators'	=> array('Alnum'),
 			'required'		=> false
 		));
 		

@@ -52,7 +52,7 @@ class LoginController extends MyBills_Controller_Action
 			// The user is logged in and can be redirected to index
 			// unless he clicked the logout action
 			if ('logout' != $this->getRequest()->getActionName()) {
-			#	$this->_helper->redirector('index', 'index');
+				$this->_helper->redirector('index', 'index');
 			}
 		} else {
 			// If they aren't logged in they can't logout so we redirect
@@ -71,7 +71,7 @@ class LoginController extends MyBills_Controller_Action
 	public function indexAction()
 	{
 		Zend_Registry::get('logger')->info(__METHOD__);
-				
+		
 		$this->view->form = $this->getForm();
 		return;
 	}
@@ -98,6 +98,7 @@ class LoginController extends MyBills_Controller_Action
 				if ($result->isValid()) {
 					$storage = $auth->getStorage();
 					$storage->write($adapter->getResultRowObject(array(
+						'uuid',
 						'username'
 					)));
 					return $this->_helper->redirector('index', 'index');

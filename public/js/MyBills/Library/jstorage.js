@@ -231,10 +231,16 @@
         return true;
     }
     
+    /**
+     * Function escapes a regular expression
+     */
     function _escapeRe(s){
     	return s.replace(/([-.*+?^${}()|[\]\/\\])/g, "\\$1");
     }
     
+    /**
+     * Function creates a new regular expression value matcher
+     */
     function _createValueMatcher(value, anyMatch, caseSensitive, exactMatch){
     	if (!value.exec) {
     		var er = _escapeRe;
@@ -251,6 +257,9 @@
     	return value;
     }
     
+    /**
+     * Function creates a filter function to test value on property column
+     */
     function _createFilterFn(property, value, anyMatch, caseSensitive, exactMatch){
 		if(_isEmpty(value, false)){
 			return false;
@@ -261,22 +270,33 @@
 		};
     }
     
-    function _createMultipleFilterFn(filters){
+    /**
+     * Function creates a multiple filter function to test on multiple property columns
+     */
+    function _createMultipleFilterFn(filters, and){
 		return function(r) {
-			var isMatch = true;
+			var isMatch = and || false;
 		
 			for (var i=0, j = filters.length; i < j; i++) {
 				var filter = filters[i],
 					fn     = filter.fn,
 					scope  = filter.scope;
-		
-				isMatch = isMatch && fn.call(scope, r);
+				if (fn) {
+					if (and !== true) {
+						isMatch = isMatch || fn.call(scope, r);
+					} else {
+						isMatch = isMatch && fn.call(scope, r);
+					}
+				}
 			}
 		
 			return isMatch;
 		};
     }
     
+    /**
+     * Function checks if a value is empty
+     */
     function _isEmpty(v, allowBlank){
     	return v === null || v === undefined || (((toString.apply(v) === '[object Array]') && !v.length)) || (!allowBlank ? v === '' : false)
     }
@@ -319,7 +339,7 @@
             _checkKey(key);
             if(key in _storage){
                 if(typeof _storage[key] == "object" &&
-                        _storage[key]._is_xml &&
+                        _storage[key]._is_xml != null &&
                             _storage[key]._is_xml){
                     return _XMLService.decode(_storage[key].xml);
                 }else{
@@ -412,13 +432,13 @@
          * 
          * @returns Object
          */
-        filter: function(key, property, value, anyMatch, caseSensitive, exactMatch){
+        filter: function(key, property, value, anyMatch, caseSensitive, exactMatch, multipleAnd){
 			//we can accept an array of filter objects, or a single filter object - normalize them here
 			if (!!property && Object.prototype.toString.call(property) === '[object Object]') {
 				property = [property];
 			}
 			
-			if (toString.apply(property) === '[object Array]') {
+			if (Object.prototype.toString.apply(property) === '[object Array]') {
 				var filters = [];
 			
 				//normalize the filters passed into an array of filter functions
@@ -428,14 +448,19 @@
 					scope  = filter.scope || this;
 			
 					//if we weren't given a filter function, construct one now
-					if (!Ext.isFunction(func)) {
-						func = _createFilterFn(filter.property, filter.value, filter.anyMatch, filter.caseSensitive, filter.exactMatch);
+					if (typeof func != 'function') {
+						if (filter.property !== undefined) {
+							func = _createFilterFn(filter.property, filter.value, filter.anyMatch, filter.caseSensitive, filter.exactMatch);
+						} else {
+							func = _createFilterFn(filter, value, anyMatch, caseSensitive, exactMatch);
+						}
 					}
 			
+					multipleAnd = multipleAnd || filter.multipleAnd;
+					
 					filters.push({fn: func, scope: scope});
 				}
-			
-				var fn = _createMultipleFilterFn(filters);
+				var fn = _createMultipleFilterFn(filters, multipleAnd);
 			} else {
 				//classic single property filter
 				var fn = _createFilterFn(property, value, anyMatch, caseSensitive, exactMatch);
@@ -444,6 +469,11 @@
 			return fn ? this.filterBy(key, fn) : false;
         },
         
+        /**
+         * Filter a key with a function
+         * 
+         * @returns Object
+         */
         filterBy: function(key, fn){
         	var data = this.get(key);
         	

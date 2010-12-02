@@ -52,7 +52,11 @@ Number.implement({
 
 Element.implement({
 	autocomplete: function(options) {
-		new MyBills_Library_Autocomplete(this, options);
+		if (this.autocompleter == undefined) {
+			this.autocompleter = new MyBills_Library_Autocomplete(this, options);
+		} else {
+			this.autocompleter.setOptions(options);
+		}
 		return this;
 	},
 	hide: function() {

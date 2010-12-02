@@ -9,15 +9,7 @@ var MyBills_Library_Autocomplete = new Class({
 	initialize: function(el, options) {
 		this.el = el;
 		
-		options.styles = $extend({
-			'width': '500px',
-			'margin-top': '20px'
-		}, options.styles);
-		
-		this.options = $extend({
-			delimiter: ', ',
-			max: 10
-		}, options);
+		this.setOptions(options);
 		
 		if ((this.el.get('tag') !== 'input') && (this.el.get('type') !== 'text')) {
 			throw new Exception('Autocomplete only works with input elements.');
@@ -35,14 +27,8 @@ var MyBills_Library_Autocomplete = new Class({
 				this.showList();
 			}.bind(this),
 			blur: function() {
-				this.hideList();	
-			}.bind(this),
-			keydown: function(e) {
-				switch (e.key) {
-					case 'tab':
-						this.selectItem();
-						break;
-				}
+				this.hideList();
+				this.selectItem();
 			}.bind(this),
 			keyup: function(e) {
 				switch (e.key) {
@@ -60,6 +46,18 @@ var MyBills_Library_Autocomplete = new Class({
 		});
 	},
 	
+	setOptions: function(options) {
+		options.styles = $extend({
+			'width': '500px',
+			'margin-top': '20px'
+		}, options.styles);
+		
+		this.options = $extend({
+			delimiter: ', ',
+			max: 10
+		}, options);
+	},
+	
 	showList: function() {
 		this.addElements();
 		this.list.setStyle('display', 'inline');
@@ -73,13 +71,15 @@ var MyBills_Library_Autocomplete = new Class({
 		this.removeActive();
 		if (up) {
 			if (!active || (null == active.getPrevious())) {
-				this.list.getLast().addClass('active');
+				if (null !== this.list.getLast())
+					this.list.getLast().addClass('active');
 			} else {
 				active.getPrevious().addClass('active');
 			}
 		} else {
 			if (!active || (null == active.getNext())) {
-				this.list.getFirst().addClass('active');
+				if (null !== this.list.getFirst())
+					this.list.getFirst().addClass('active');
 			} else {
 				active.getNext().addClass('active');
 			}
@@ -88,9 +88,23 @@ var MyBills_Library_Autocomplete = new Class({
 	
 	addElements: function() {
 		this.list.empty();
-		var c = 0, tmp = [];
+		var c = 0, tmp = [], store;
 		
-		$each($.jStorage.filter(this.options.store, this.options.filter, this.ac.get('value'), true, false, false), function(item) {
+		if (Object.prototype.toString.apply(this.options.filter) === '[object Array]') {
+			this.options.filter.each(function(item, index) {
+				if (this.options.filter[index]['value'] == undefined) {
+					this.options.filter[index]['value'] = this.ac.get('value');
+					this.options.filter[index]['me'] = true;
+				}
+				if (this.options.filter[index]['me'] === true) {
+					this.options.filter[index]['value'] = this.ac.get('value');
+				}
+			}.bind(this));
+			store = $.jStorage.filter(this.options.store, this.options.filter);
+		} else {
+			store = $.jStorage.filter(this.options.store, this.options.filter, this.ac.get('value'), true, false, false);
+		}
+		$each(store, function(item) {
 			tmp.push(item);
 		});
 		
@@ -134,10 +148,15 @@ var MyBills_Library_Autocomplete = new Class({
 		return active;
 	},
 	selectItem: function() {
-		var item = this.getActive().retrieve('item', false);
-		this.ac.set('value', item['zzzzzz_show']);
-		this.el.set('value', item[this.options.id]);
-		console.log(item[this.options.id], this.el);
+		if (typeof this.getActive().retrieve == 'function') {
+			var item = this.getActive().retrieve('item', false);
+			this.ac.set('value', item['zzzzzz_show']);
+			this.el.set('value', item[this.options.id]).fireEvent('change');
+		} else if (this.options.allowNew) {
+			this.el.set('value', this.ac.get('value')).fireEvent('change');
+		} else {
+			this.ac.set('value', '');
+		}
 	}
 	
 	
